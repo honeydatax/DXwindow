@@ -36,6 +36,7 @@ void drawlabel(char *title,int x,int y,int w, int h){
 }
 void drawWindow(char *title,int x,int y,int w, int h,int r,int g, int b){
 	boxs(x,y,w,h,r,g,b);
+	rectangle(x,y,w,h,0,0,0);
 	drawlabel(title,x,y,w,h);
 }
 void windowsRefresh(){
