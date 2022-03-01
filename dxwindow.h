@@ -99,3 +99,9 @@ void windowsRefresh(){
 		putImage(nx,ny,win[n].dc);
 	}
 }
+void exitWindow(){
+	int n;
+	for(n=0;n<wcount;n++){
+		if(win[n].dc!=NULL)free(win[n].dc);
+	}
+}

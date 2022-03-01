@@ -15,6 +15,7 @@ int main(int argc,char *argv[])
 	}
 	windowsRefresh();
 	sleep(5);
+	exitWindow();
 	endX(fbfd);
     return 0;
 }
