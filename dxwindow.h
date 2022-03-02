@@ -98,10 +98,11 @@ int onclick(){
 }
 int redrawCursor(){
 	int rets=-1;
+	int i=-1;
 	left=0;
 	right=0;
 	middle=0;
-	mouseEvent();
+	i=mouseEvent();
 	curs.x1=mouseX-16;
 	curs.y1=mouseY-16;
 	curs.left=left;
@@ -120,7 +121,7 @@ int redrawCursor(){
 			drawCursor();
 		}
 	}
-	if(curs.left!=0)rets=onclick();
+	if(i==-1 && curs.left!=0)rets=onclick();
 	return rets;
 }
 void windowsRefresh(){
