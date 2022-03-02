@@ -2,6 +2,7 @@
 //g++ -o vline vline.c
 int main(int argc,char *argv[])
 {
+    int i=-1;
     char cc[2080];
     char *ccc;
     int n=0;
@@ -16,7 +17,11 @@ int main(int argc,char *argv[])
 	windowsRefresh();
 	while(1){
 		if(getc(stdin)==27)break;
-		redrawCursor();
+		i=redrawCursor();
+		if(i!=-1){
+			printf("windows press:%d\n",i);
+			break;
+		}
 	}
 	exitWindow();
 	endX(fbfd);
