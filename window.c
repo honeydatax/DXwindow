@@ -19,8 +19,8 @@ int main(int argc,char *argv[])
 		if(getc(stdin)==27)break;
 		i=redrawCursor();
 		if(i!=-1){
-			printf("windows press:%d\n",i);
-			break;
+			moveTop(i);
+			windowsRefresh();
 		}
 	}
 	exitWindow();

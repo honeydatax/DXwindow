@@ -138,3 +138,23 @@ void windowsRefresh(){
 	}
 	showCursor();
 }
+void moveTop(int index){
+	int n;
+	int i=-1;
+	int t=0;
+	int o=0;
+	for (n=0;n<wcount;n++){
+		if(index==zorder[n]){
+			t=zorder[n];
+			o=1;
+		}
+		if(o==1){
+			zorder[n]=zorder[n+1];
+		} 
+	}
+	zorder[wcount-1]=t;
+}
+
+
+
+
