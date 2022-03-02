@@ -14,7 +14,11 @@ int main(int argc,char *argv[])
 		newWindow(ccc,n*10,n*10,100,100,n*50+100,n*50+100,n*50+100);
 	}
 	windowsRefresh();
-	sleep(5);
+	showCursor();
+	while(1){
+		if(getc(stdin)==27)break;
+		redrawCursor();
+	}
 	exitWindow();
 	endX(fbfd);
     return 0;

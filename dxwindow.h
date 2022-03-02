@@ -11,6 +11,14 @@ struct windows{
 	int g;
 	int b;
 };
+struct cursors{
+	int x;
+	int y;
+	int x1;
+	int y1;
+	int *cursor;
+};
+struct cursors curs;
 struct windows win[maxw];
 int wcount=0;
 void irectangle(int x,int y,int x2,int y2,int *dc,char r,char g,char b){
@@ -103,5 +111,42 @@ void exitWindow(){
 	int n;
 	for(n=0;n<wcount;n++){
 		if(win[n].dc!=NULL)free(win[n].dc);
+	}
+	if(curs.cursor!=NULL)free(curs.cursor);
+}
+void drawCursor(){
+	ball(curs.x+16,curs.y+16,3,128,128,128);
+	circle(curs.x+16,curs.y+16,3,0,0,0);
+}
+void showCursor(){
+	curs.cursor=creatImage(32,32);
+	mouseEvent();
+	curs.x=mouseX-16;
+	curs.y=mouseY-16;
+	if(curs.x<0)curs.x=0;
+	if(curs.y<0)curs.y=0;
+	if(curs.x>=vinfo.xres-1)curs.x=vinfo.xres-33;
+	if(curs.y>=vinfo.yres-1)curs.y=vinfo.yres-33;
+	curs.x1=curs.x;
+	curs.y1=curs.y;
+	copyImage(curs.x,curs.y,curs.cursor);
+	drawCursor();
+}
+void redrawCursor(){
+	mouseEvent();
+	curs.x1=mouseX-16;
+	curs.y1=mouseY-16;
+	if(curs.x1<0)curs.x1=0;
+	if(curs.y1<0)curs.y1=0;
+	if(curs.x1>=vinfo.xres-1)curs.x1=vinfo.xres-33;
+	if(curs.y1>=vinfo.yres-1)curs.y1=vinfo.yres-33;
+	if(curs.x1!=curs.x || curs.y1!=curs.y){
+		if(curs.x1!=0 && curs.y1!=0 && curs.x1<vinfo.xres-33 && curs.y1<vinfo.yres-33){
+			putImage(curs.x,curs.y,curs.cursor);
+			curs.x=curs.x1;
+			curs.y=curs.y1;
+			copyImage(curs.x,curs.y,curs.cursor);		
+			drawCursor();
+		}
 	}
 }
