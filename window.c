@@ -11,7 +11,7 @@ int main(int argc,char *argv[])
 	for(n=0;n<4;n++){
 		ccc=cc+(n*10);
 		sprintf(ccc,"W%d",n);
-		newWindow(ccc,n*10,n*10,100,100,n*50+100,n*50+100,n*50+100);
+		newWindow(ccc,n*20,n*20,200,200,n*50+100,n*50+100,n*50+100);
 	}
 	windowsRefresh();
 	while(1){
