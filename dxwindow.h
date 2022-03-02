@@ -21,48 +21,6 @@ struct cursors{
 struct cursors curs;
 struct windows win[maxw];
 int wcount=0;
-void irectangle(int x,int y,int x2,int y2,int *dc,char r,char g,char b){
-iline(x,y,x2,y,dc,r,g,b);
-iline(x,y2,x2,y2,dc,r,g,b);
-iline(x,y,x,y2,dc,r,g,b);
-iline(x2,y,x2,y2,dc,r,g,b);
-}
-void igputc(int *dc,int x,int y,char r,char g,char b,char c){
-char bits;
-char bit;
-int scrolls;
-int iii=0;
-int ii=0;
-int xx=x;
-int yy=y;
-int aa=0;
-aa=c*8;
-for (ii=0;ii<8;ii++){
-scrolls=128;
-bits=font8x8[aa];
-for (iii=0;iii<8;iii++){
-if ((bits & scrolls)!=0){
-Ipixel(xx,yy,dc,r,g,b);
-}
-xx++;
-scrolls=scrolls/2;
-}
-xx=x;
-aa++;
-yy++;
-}
-
-} 
-void igputs(int *dc,int x,int y,char r,char g,char b,char *c){
-int ii=0;
-int xx=x;
-int yy=y;
-while(c[ii]!=0){
-igputc(dc,xx,yy,r,g,b,c[ii]);
-xx=xx+8;
-ii++;
-}
-}
 void drawlabel(int *dc,char *title,int x,int y,int w, int h){
 	char c[w/9+2];
 	strncpy(c,title,w/9);
