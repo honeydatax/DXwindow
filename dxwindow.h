@@ -18,6 +18,7 @@ struct cursors{
 	int y1;
 	int *cursor;
 };
+int loads=0;
 struct cursors curs;
 struct windows win[maxw];
 int wcount=0;
@@ -52,19 +53,6 @@ int newWindow(char *title,int x,int y,int w, int h,int r,int g, int b){
 		www=-1;
 	}
 }
-void windowsRefresh(){
-	int n;
-	int nx;
-	int ny;
-	boxs(0,0,vinfo.xres-1,vinfo.yres-1,0,0,0);
-	for(n=0;n<wcount;n++){
-		nx=win[n].x;
-		ny=win[n].y;
-		if(nx+win[n].w>vinfo.xres-1)nx=0;
-		if(ny+win[n].h>vinfo.yres-1)ny=0;
-		putImage(nx,ny,win[n].dc);
-	}
-}
 void exitWindow(){
 	int n;
 	for(n=0;n<wcount;n++){
@@ -77,7 +65,8 @@ void drawCursor(){
 	circle(curs.x+16,curs.y+16,3,0,0,0);
 }
 void showCursor(){
-	curs.cursor=creatImage(32,32);
+	if (loads==0)curs.cursor=creatImage(32,32);
+	loads=1;
 	mouseEvent();
 	curs.x=mouseX-16;
 	curs.y=mouseY-16;
@@ -107,4 +96,18 @@ void redrawCursor(){
 			drawCursor();
 		}
 	}
+}
+void windowsRefresh(){
+	int n;
+	int nx;
+	int ny;
+	boxs(0,0,vinfo.xres-1,vinfo.yres-1,0,0,0);
+	for(n=0;n<wcount;n++){
+		nx=win[n].x;
+		ny=win[n].y;
+		if(nx+win[n].w>vinfo.xres-1)nx=0;
+		if(ny+win[n].h>vinfo.yres-1)ny=0;
+		putImage(nx,ny,win[n].dc);
+	}
+	showCursor();
 }
